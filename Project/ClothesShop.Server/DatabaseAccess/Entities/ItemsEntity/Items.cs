@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 using ClothesShop.DatabaseAccess.Entities.PhotosEntity;
 using ClothesShop.DatabaseAccess.Entities.CategoryEntity;
 using ClothesShop.DatabaseAccess.Entities.CartEntity;
+using ClothesShop.DatabaseAccess.Entities.UserEntity;
 
 namespace ClothesShop.DatabaseAccess.Entities.ItemsEntity
 {
     public class Items
     {
         public int Id { get; set; }
-        public int CategoryId { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
@@ -27,6 +27,12 @@ namespace ClothesShop.DatabaseAccess.Entities.ItemsEntity
         public Cart Cart { get; set; }
 
         public List<Photos> Photos { get; set; }
+
+        [Required]
+        public int CategoryId { get; set; }
         public Category Category { get; set; }
+
+        public Guid UserId { get; set; }
+        public User User { get; set; }
     }
 }

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClothesShop.DatabaseAccess.Migrations
 {
     [DbContext(typeof(ClothesShopDbContext))]
-    [Migration("20230326123019_Initial")]
+    [Migration("20230326163124_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,7 +40,8 @@ namespace ClothesShop.DatabaseAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Cart");
                 });
@@ -94,11 +95,16 @@ namespace ClothesShop.DatabaseAccess.Migrations
                     b.Property<float>("Size")
                         .HasColumnType("real");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CartId");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Items");
                 });
@@ -179,7 +185,7 @@ namespace ClothesShop.DatabaseAccess.Migrations
                     b.Property<DateTime>("RegistrationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 3, 26, 14, 30, 19, 558, DateTimeKind.Local).AddTicks(3287));
+                        .HasDefaultValue(new DateTime(2023, 3, 26, 18, 31, 24, 545, DateTimeKind.Local).AddTicks(9391));
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -342,8 +348,8 @@ namespace ClothesShop.DatabaseAccess.Migrations
             modelBuilder.Entity("ClothesShop.DatabaseAccess.Entities.CartEntity.Cart", b =>
                 {
                     b.HasOne("ClothesShop.DatabaseAccess.Entities.UserEntity.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
+                        .WithOne("Cart")
+                        .HasForeignKey("ClothesShop.DatabaseAccess.Entities.CartEntity.Cart", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -359,14 +365,22 @@ namespace ClothesShop.DatabaseAccess.Migrations
                         .IsRequired();
 
                     b.HasOne("ClothesShop.DatabaseAccess.Entities.CategoryEntity.Category", "Category")
-                        .WithMany()
+                        .WithMany("Items")
                         .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ClothesShop.DatabaseAccess.Entities.UserEntity.User", "User")
+                        .WithMany("Items")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Cart");
 
                     b.Navigation("Category");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ClothesShop.DatabaseAccess.Entities.PhotosEntity.Photos", b =>
@@ -436,9 +450,22 @@ namespace ClothesShop.DatabaseAccess.Migrations
                     b.Navigation("Items");
                 });
 
+            modelBuilder.Entity("ClothesShop.DatabaseAccess.Entities.CategoryEntity.Category", b =>
+                {
+                    b.Navigation("Items");
+                });
+
             modelBuilder.Entity("ClothesShop.DatabaseAccess.Entities.ItemsEntity.Items", b =>
                 {
                     b.Navigation("Photos");
+                });
+
+            modelBuilder.Entity("ClothesShop.DatabaseAccess.Entities.UserEntity.User", b =>
+                {
+                    b.Navigation("Cart")
+                        .IsRequired();
+
+                    b.Navigation("Items");
                 });
 #pragma warning restore 612, 618
         }
