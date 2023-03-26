@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ClothesShop.DatabaseAccess.Entities.ItemsEntity;
 using ClothesShop.DatabaseAccess.Entities.UserEntity;
+
 namespace ClothesShop.DatabaseAccess.Entities.CartEntity
 {
     public class Cart
