@@ -14,6 +14,7 @@ namespace ClothesShop.DatabaseAccess.Entities.UserEntity
             builder
                 .Property(x => x.RegistrationDate)
                 .HasDefaultValue(DateTime.Now);
+
         }
     }
 }

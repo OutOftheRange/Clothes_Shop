@@ -15,6 +15,17 @@ namespace ClothesShop.DatabaseAccess.Entities.ItemsEntity
                 .WithOne(x => x.Item)
                 .HasForeignKey(x => x.ItemId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            builder
+                .HasOne(x => x.Category)
+                .WithMany(x => x.Items)
+                .HasForeignKey(x => x.CategoryId);
+
+            builder
+                .HasOne(x => x.User)
+                .WithMany(x => x.Items)
+                .HasForeignKey(x => x.UserId);
+
         }
     }
 }

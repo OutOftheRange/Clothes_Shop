@@ -1,6 +1,4 @@
-﻿using ClothesShop.DatabaseAccess.Entities.CategoryEntity;
-using ClothesShop.DatabaseAccess.Entities.ItemsEntity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ClothesShop.DatabaseAccess.Entities.CartEntity
@@ -17,6 +15,10 @@ namespace ClothesShop.DatabaseAccess.Entities.CartEntity
                 .WithOne(x => x.Cart)
                 .HasForeignKey(x => x.CartId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            builder
+                .HasOne(x => x.User)
+                .WithOne(x => x.Cart);
         }
     }
 }

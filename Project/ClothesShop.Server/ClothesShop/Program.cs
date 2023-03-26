@@ -1,6 +1,6 @@
 using System;
 using ClothesShop.DatabaseAccess;
-using ClothesShop.DatabaseAccess.Entities.UserEntity;
+using ClothesShop.DatabaseAccess.Entities.UserEntity ;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
