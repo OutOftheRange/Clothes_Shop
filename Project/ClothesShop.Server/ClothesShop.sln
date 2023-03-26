@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClothesShop", "ClothesShop\ClothesShop.csproj", "{A819B1E2-E80F-4630-BAC0-B80B9AD86A93}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClothesShop.WebAPI", "ClothesShop\ClothesShop.WebAPI.csproj", "{A819B1E2-E80F-4630-BAC0-B80B9AD86A93}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{48BF6B91-79C7-410A-A02F-36B59F25A8B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClothesShop.Services", "Services\ClothesShop.Services.csproj", "{48BF6B91-79C7-410A-A02F-36B59F25A8B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseAccess", "DatabaseAccess\DatabaseAccess.csproj", "{B0CBCDE6-65CB-46AD-B231-D28B807D96F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClothesShop.DatabaseAccess", "DatabaseAccess\ClothesShop.DatabaseAccess.csproj", "{B0CBCDE6-65CB-46AD-B231-D28B807D96F4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
