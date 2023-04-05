@@ -27,46 +27,46 @@ namespace ClothesShop.Services.Services
             user.RegistrationDate = DateTime.Now;
 
             var result = await _userManager.CreateAsync(user, registerData.Password);
-            var responce = new ResponseData();
+            var response = new ResponseData();
             if (result.Succeeded)
             {
-                responce.Result = true;
-                responce.Message = "User has been created successfully";
+                response.Result = true;
+                response.Message = "User has been created successfully";
             }
             else
             {
-                responce.Result = false;
-                responce.Message = "A problem occurred while creating a user";
+                response.Result = false;
+                response.Message = "A problem occurred while creating a user";
             }
-            return responce;
+            return response;
         }
 
         public async Task<ResponseWithTokenData> Login(LoginData loginData)
         {
             var user = await _userManager.FindByEmailAsync(loginData.Email);
 
-            var responce = new ResponseWithTokenData();
+            var response = new ResponseWithTokenData();
             if (user == null)
             {
-                responce.Result = false;
-                responce.Message = "User with provided email was not founded";
-                return responce;
+                response.Result = false;
+                response.Message = "User with provided email was not founded";
+                return response;
             }
 
             var result = await _signInManager.PasswordSignInAsync(user, loginData.Password, true, false);
 
             if(result.Succeeded)
             {
-                responce.Result = true;
-                responce.Token = _tokenService.GenerateToken(user);
-                responce.Message = "Log in was successfully";
-            }
+                response.Result = true;
+                response.Token = _tokenService.GenerateToken(user);
+                response.Message = "Log in was successfully";
+            }   
             else
             {
-                responce.Result = false;
-                responce.Message = "A problem occurred while logging in to a user account";
+                response.Result = false;
+                response.Message = "A problem occurred while logging in to a user account";
             }
-            return responce;
+            return response;
         }
     }
 }
