@@ -4,11 +4,6 @@ using ClothesShop.Services.DTO.Authentication;
 using ClothesShop.Services.Interfaces;
 using ClothesShopServices.WebAPI.DTO;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClothesShop.Services.Services
 {
