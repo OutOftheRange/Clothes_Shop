@@ -1,8 +1,9 @@
 ﻿using System;
+using ClothesShop.DatabaseAccess.Entities.CartEntity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace ClothesShop.DatabaseAccess.Entities.UserEntity
+namespace ClothesShop.DatabaseAccess.Entities.UserEntity.User
 {
     public class UserConfiguration : IEntityTypeConfiguration<User>
     {

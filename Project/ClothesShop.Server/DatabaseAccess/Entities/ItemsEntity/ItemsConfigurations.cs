@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
+using ClothesShop.DatabaseAccess.Entities.CartEntity;
 namespace ClothesShop.DatabaseAccess.Entities.ItemsEntity
 {
     public class ItemsConfiguration : IEntityTypeConfiguration<Items>
@@ -19,13 +19,31 @@ namespace ClothesShop.DatabaseAccess.Entities.ItemsEntity
             builder
                 .HasOne(x => x.Category)
                 .WithMany(x => x.Items)
-                .HasForeignKey(x => x.CategoryId);
+                .HasForeignKey(x => x.CategoryId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder
                 .HasOne(x => x.User)
                 .WithMany(x => x.Items)
-                .HasForeignKey(x => x.UserId);
+                .HasForeignKey(x => x.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
 
+            builder
+                .HasOne(x => x.Size)
+                .WithMany(x => x.Items)
+                .HasForeignKey(x => x.SizeId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder
+                .HasOne(x => x.Color)
+                .WithMany(x => x.Items)
+                .HasForeignKey(x => x.ColorId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder
+                .HasOne(x => x.CartItem)
+                .WithOne(x => x.Item)
+                .HasForeignKey<CartItems>(x => x.ItemId);
         }
     }
 }

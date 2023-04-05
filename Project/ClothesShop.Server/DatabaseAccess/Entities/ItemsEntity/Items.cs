@@ -7,24 +7,31 @@ using System.Threading.Tasks;
 using ClothesShop.DatabaseAccess.Entities.PhotosEntity;
 using ClothesShop.DatabaseAccess.Entities.CategoryEntity;
 using ClothesShop.DatabaseAccess.Entities.CartEntity;
-using ClothesShop.DatabaseAccess.Entities.UserEntity;
+using ClothesShop.DatabaseAccess.Entities.ColorsEntity;
+using ClothesShop.DatabaseAccess.Entities.SizesEntity;
+using ClothesShop.DatabaseAccess.Entities.UserEntity.User;
 
 namespace ClothesShop.DatabaseAccess.Entities.ItemsEntity
 {
     public class Items
     {
         public int Id { get; set; }
+        public bool IsDeactivated { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
         public string Info { get; set; }
-        public string Color { get; set; }
-        [Required]
-        public float Price { get; set; }
-        public float Size { get; set; }
 
-        public int CartId { get; set; }
-        public Cart Cart { get; set; }
+        public int ColorId { get; set; } 
+        public Colors Color { get; set; }
+
+        [Required]
+        public double Price { get; set; }
+
+        public int SizeId { get; set; }
+        public Sizes Size { get; set; }
+
+        public CartItems CartItem { get; set; }
 
         public List<Photos> Photos { get; set; }
 

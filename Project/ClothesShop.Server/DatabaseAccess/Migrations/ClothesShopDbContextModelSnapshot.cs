@@ -22,7 +22,7 @@ namespace ClothesShop.DatabaseAccess.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("ClothesShop.DatabaseAccess.Entities.CartEntity.Cart", b =>
+            modelBuilder.Entity("ClothesShop.DatabaseAccess.Entities.CartEntity.CartItems", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -30,18 +30,24 @@ namespace ClothesShop.DatabaseAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("ItemsQuantity")
+                    b.Property<int>("ItemId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId")
+                    b.HasIndex("ItemId")
                         .IsUnique();
 
-                    b.ToTable("Cart");
+                    b.HasIndex("UserId");
+
+                    b.ToTable("CartItems");
                 });
 
             modelBuilder.Entity("ClothesShop.DatabaseAccess.Entities.CategoryEntity.Category", b =>
@@ -61,6 +67,23 @@ namespace ClothesShop.DatabaseAccess.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("ClothesShop.DatabaseAccess.Entities.ColorsEntity.Colors", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Colors");
+                });
+
             modelBuilder.Entity("ClothesShop.DatabaseAccess.Entities.ItemsEntity.Items", b =>
                 {
                     b.Property<int>("Id")
@@ -69,38 +92,39 @@ namespace ClothesShop.DatabaseAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CartId")
-                        .HasColumnType("int");
-
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Color")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ColorId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Info")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDeactivated")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("Price")
-                        .HasColumnType("real");
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
 
-                    b.Property<float>("Size")
-                        .HasColumnType("real");
+                    b.Property<int>("SizeId")
+                        .HasColumnType("int");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CartId");
-
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("ColorId");
+
+                    b.HasIndex("SizeId");
 
                     b.HasIndex("UserId");
 
@@ -129,7 +153,24 @@ namespace ClothesShop.DatabaseAccess.Migrations
                     b.ToTable("Photos");
                 });
 
-            modelBuilder.Entity("ClothesShop.DatabaseAccess.Entities.UserEntity.User", b =>
+            modelBuilder.Entity("ClothesShop.DatabaseAccess.Entities.SizesEntity.Sizes", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sizes");
+                });
+
+            modelBuilder.Entity("ClothesShop.DatabaseAccess.Entities.UserEntity.User.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -137,6 +178,9 @@ namespace ClothesShop.DatabaseAccess.Migrations
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
+
+                    b.Property<float>("Balance")
+                        .HasColumnType("real");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -147,6 +191,9 @@ namespace ClothesShop.DatabaseAccess.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeactivated")
                         .HasColumnType("bit");
 
                     b.Property<bool>("LockoutEnabled")
@@ -170,10 +217,6 @@ namespace ClothesShop.DatabaseAccess.Migrations
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
@@ -183,7 +226,7 @@ namespace ClothesShop.DatabaseAccess.Migrations
                     b.Property<DateTime>("RegistrationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 3, 26, 18, 31, 24, 545, DateTimeKind.Local).AddTicks(9391));
+                        .HasDefaultValue(new DateTime(2023, 4, 5, 15, 42, 10, 749, DateTimeKind.Local).AddTicks(5210));
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -343,40 +386,56 @@ namespace ClothesShop.DatabaseAccess.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("ClothesShop.DatabaseAccess.Entities.CartEntity.Cart", b =>
+            modelBuilder.Entity("ClothesShop.DatabaseAccess.Entities.CartEntity.CartItems", b =>
                 {
-                    b.HasOne("ClothesShop.DatabaseAccess.Entities.UserEntity.User", "User")
-                        .WithOne("Cart")
-                        .HasForeignKey("ClothesShop.DatabaseAccess.Entities.CartEntity.Cart", "UserId")
+                    b.HasOne("ClothesShop.DatabaseAccess.Entities.ItemsEntity.Items", "Item")
+                        .WithOne("CartItem")
+                        .HasForeignKey("ClothesShop.DatabaseAccess.Entities.CartEntity.CartItems", "ItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("ClothesShop.DatabaseAccess.Entities.UserEntity.User.User", "User")
+                        .WithMany("Cart")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Item");
 
                     b.Navigation("User");
                 });
 
             modelBuilder.Entity("ClothesShop.DatabaseAccess.Entities.ItemsEntity.Items", b =>
                 {
-                    b.HasOne("ClothesShop.DatabaseAccess.Entities.CartEntity.Cart", "Cart")
-                        .WithMany("Items")
-                        .HasForeignKey("CartId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
                     b.HasOne("ClothesShop.DatabaseAccess.Entities.CategoryEntity.Category", "Category")
                         .WithMany("Items")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("ClothesShop.DatabaseAccess.Entities.UserEntity.User", "User")
+                    b.HasOne("ClothesShop.DatabaseAccess.Entities.ColorsEntity.Colors", "Color")
+                        .WithMany("Items")
+                        .HasForeignKey("ColorId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("ClothesShop.DatabaseAccess.Entities.SizesEntity.Sizes", "Size")
+                        .WithMany("Items")
+                        .HasForeignKey("SizeId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("ClothesShop.DatabaseAccess.Entities.UserEntity.User.User", "User")
                         .WithMany("Items")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.Navigation("Cart");
-
                     b.Navigation("Category");
+
+                    b.Navigation("Color");
+
+                    b.Navigation("Size");
 
                     b.Navigation("User");
                 });
@@ -403,7 +462,7 @@ namespace ClothesShop.DatabaseAccess.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
-                    b.HasOne("ClothesShop.DatabaseAccess.Entities.UserEntity.User", null)
+                    b.HasOne("ClothesShop.DatabaseAccess.Entities.UserEntity.User.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -412,7 +471,7 @@ namespace ClothesShop.DatabaseAccess.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
-                    b.HasOne("ClothesShop.DatabaseAccess.Entities.UserEntity.User", null)
+                    b.HasOne("ClothesShop.DatabaseAccess.Entities.UserEntity.User.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -427,7 +486,7 @@ namespace ClothesShop.DatabaseAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ClothesShop.DatabaseAccess.Entities.UserEntity.User", null)
+                    b.HasOne("ClothesShop.DatabaseAccess.Entities.UserEntity.User.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -436,16 +495,11 @@ namespace ClothesShop.DatabaseAccess.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.HasOne("ClothesShop.DatabaseAccess.Entities.UserEntity.User", null)
+                    b.HasOne("ClothesShop.DatabaseAccess.Entities.UserEntity.User.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("ClothesShop.DatabaseAccess.Entities.CartEntity.Cart", b =>
-                {
-                    b.Navigation("Items");
                 });
 
             modelBuilder.Entity("ClothesShop.DatabaseAccess.Entities.CategoryEntity.Category", b =>
@@ -453,15 +507,27 @@ namespace ClothesShop.DatabaseAccess.Migrations
                     b.Navigation("Items");
                 });
 
+            modelBuilder.Entity("ClothesShop.DatabaseAccess.Entities.ColorsEntity.Colors", b =>
+                {
+                    b.Navigation("Items");
+                });
+
             modelBuilder.Entity("ClothesShop.DatabaseAccess.Entities.ItemsEntity.Items", b =>
                 {
+                    b.Navigation("CartItem")
+                        .IsRequired();
+
                     b.Navigation("Photos");
                 });
 
-            modelBuilder.Entity("ClothesShop.DatabaseAccess.Entities.UserEntity.User", b =>
+            modelBuilder.Entity("ClothesShop.DatabaseAccess.Entities.SizesEntity.Sizes", b =>
                 {
-                    b.Navigation("Cart")
-                        .IsRequired();
+                    b.Navigation("Items");
+                });
+
+            modelBuilder.Entity("ClothesShop.DatabaseAccess.Entities.UserEntity.User.User", b =>
+                {
+                    b.Navigation("Cart");
 
                     b.Navigation("Items");
                 });

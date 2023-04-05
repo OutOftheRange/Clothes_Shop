@@ -6,6 +6,9 @@ using ClothesShop.DatabaseAccess.Entities.CategoryEntity;
 using ClothesShop.DatabaseAccess.Entities.ItemsEntity;
 using ClothesShop.DatabaseAccess.Entities.PhotosEntity;
 using ClothesShop.DatabaseAccess.Entities.UserEntity;
+using ClothesShop.DatabaseAccess.Entities.ColorsEntity;
+using ClothesShop.DatabaseAccess.Entities.SizesEntity;
+using ClothesShop.DatabaseAccess.Entities.UserEntity.User;
 
 namespace ClothesShop.DatabaseAccess
 {
@@ -27,15 +30,21 @@ namespace ClothesShop.DatabaseAccess
 
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
-            modelBuilder.ApplyConfiguration(new CartConfiguration());
+            modelBuilder.ApplyConfiguration(new CartItemsConfiguration());
             modelBuilder.ApplyConfiguration(new ItemsConfiguration());
             modelBuilder.ApplyConfiguration(new PhotosConfiguration());
+            modelBuilder.ApplyConfiguration(new SizesConfiguration());
+            modelBuilder.ApplyConfiguration(new ColorsConfiguration());
+                
         }
 
         public DbSet<User> User { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Photos> Photos { get; set; }
         public DbSet<Items> Items { get; set; }
-        public DbSet<Cart> Cart { get; set; }
+        public DbSet<CartItems> CartItems { get; set; }
+        public DbSet<Colors> Colors { get; set; }
+        public DbSet<Sizes> Sizes { get; set; }
+
     }
 }
