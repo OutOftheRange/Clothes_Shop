@@ -16,11 +16,6 @@ namespace ClothesShop.DatabaseAccess.Entities.CartEntity
                 .WithMany(x => x.Cart)
                 .HasForeignKey(x => x.UserId);
 
-            //builder
-            //    .HasOne(x => x.Items)
-            //    .WithOne(x => x.Cart)
-            //    .HasForeignKey<CartItems>(x => x.ItemId);
-
         }
     }
 }
