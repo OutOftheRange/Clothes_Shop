@@ -1,11 +1,11 @@
-﻿using ClothesShopServices.WebAPI.DTO;
+﻿using ClothesShopServices.WebAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClothesShop.Services.DTO.Authentication
+namespace ClothesShop.Services.Models.Authentication
 {
     public class ResponseWithTokenData : ResponseData
     {
