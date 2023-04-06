@@ -6,15 +6,19 @@ using ClothesShop.DatabaseAccess.Entities.UserEntity.User;
 using ClothesShop.DatabaseAccess.Initializers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using ClothesShop.WebAPI.ServiceCollectionConfiguration;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddControllers();
+builder.Services.BindServices();
+builder.Services.ConfigureMapping();
+builder.Services.ConfigureValidation();
 
 builder.Services.AddDbContext<ClothesShopDbContext>(opts =>
 {
