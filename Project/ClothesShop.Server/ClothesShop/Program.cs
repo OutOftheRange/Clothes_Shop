@@ -18,6 +18,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 builder.Services.BindServices();
 builder.Services.ConfigureMapping();
+builder.Services.ConfigureValidation();
 
 builder.Services.AddDbContext<ClothesShopDbContext>(opts =>
 {

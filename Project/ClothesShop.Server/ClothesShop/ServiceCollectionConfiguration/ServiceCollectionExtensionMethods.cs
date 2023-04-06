@@ -2,6 +2,9 @@
 using ClothesShop.Services.Interfaces;
 using ClothesShop.Services.MappingProfiles;
 using ClothesShop.Services.Services;
+using ClothesShop.Services.Validators;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -49,6 +52,11 @@ namespace ClothesShop.WebAPI.ServiceCollectionConfiguration
             services.AddTransient<IAuthenticationService, AuthenticationService>();
             services.AddTransient<ITokenService, TokenService>();
 
+        }
+
+        public static void ConfigureValidation(this IServiceCollection services)
+        {
+            services.AddValidatorsFromAssemblyContaining<RegistrationForm>(ServiceLifetime.Transient);
         }
     }
 }

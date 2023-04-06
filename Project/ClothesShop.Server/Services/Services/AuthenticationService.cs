@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using ClothesShop.DatabaseAccess.Entities.UserEntity.User;
-using ClothesShop.Services.DTO.Authentication;
+using ClothesShop.Services.Models.Authentication;
 using ClothesShop.Services.Interfaces;
-using ClothesShopServices.WebAPI.DTO;
+using ClothesShopServices.WebAPI.Models;
 using Microsoft.AspNetCore.Identity;
 
 namespace ClothesShop.Services.Services

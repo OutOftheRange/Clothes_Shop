@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ClothesShop.Services.DTO.Authentication
+namespace ClothesShop.Services.Models.Authentication
 {
     public class RegisterData
     {

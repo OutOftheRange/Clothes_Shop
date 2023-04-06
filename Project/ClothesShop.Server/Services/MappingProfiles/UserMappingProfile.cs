@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using ClothesShop.DatabaseAccess.Entities.UserEntity.User;
-using ClothesShop.Services.DTO.Authentication;
+using ClothesShop.Services.Models.Authentication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
