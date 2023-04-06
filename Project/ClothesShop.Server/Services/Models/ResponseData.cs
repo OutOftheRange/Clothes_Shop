@@ -1,4 +1,4 @@
-﻿namespace ClothesShopServices.WebAPI.DTO
+﻿namespace ClothesShopServices.WebAPI.Models
 {
     public class ResponseData
     {

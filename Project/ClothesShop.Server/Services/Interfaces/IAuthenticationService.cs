@@ -1,5 +1,5 @@
-﻿using ClothesShop.Services.DTO.Authentication;
-using ClothesShopServices.WebAPI.DTO;
+﻿using ClothesShop.Services.Models.Authentication;
+using ClothesShopServices.WebAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
