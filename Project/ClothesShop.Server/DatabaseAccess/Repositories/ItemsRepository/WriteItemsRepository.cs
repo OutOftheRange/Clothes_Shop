@@ -37,8 +37,8 @@ namespace ClothesShop.DatabaseAccess.Repositories.Items
             {
                 return null;
             }
-
-            var cartItem = new CartItems { ItemId = findedItem.Id, Name = findedItem.Name, UserId = Guid.Parse(userId) };
+            //var countCartItems = await _context.CartItems.Count;
+            var cartItem = new CartItems {ItemId = findedItem.Id,  Name = findedItem.Name, UserId = Guid.Parse(userId) };
             
             var addItemToCart = await _context.CartItems.AddAsync(cartItem);
 

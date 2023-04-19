@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClothesShop.DatabaseAccess.Migrations
 {
     [DbContext(typeof(ClothesShopDbContext))]
-    [Migration("20230418113427_Initial")]
+    [Migration("20230419142159_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,8 +44,7 @@ namespace ClothesShop.DatabaseAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ItemId")
-                        .IsUnique();
+                    b.HasIndex("ItemId");
 
                     b.HasIndex("UserId");
 
@@ -223,7 +222,7 @@ namespace ClothesShop.DatabaseAccess.Migrations
                     b.Property<DateTime>("RegistrationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 4, 18, 13, 34, 27, 1, DateTimeKind.Local).AddTicks(1128));
+                        .HasDefaultValue(new DateTime(2023, 4, 19, 16, 21, 59, 339, DateTimeKind.Local).AddTicks(125));
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -386,8 +385,8 @@ namespace ClothesShop.DatabaseAccess.Migrations
             modelBuilder.Entity("ClothesShop.DatabaseAccess.Entities.CartEntity.CartItems", b =>
                 {
                     b.HasOne("ClothesShop.DatabaseAccess.Entities.ItemsEntity.Items", "Item")
-                        .WithOne("CartItem")
-                        .HasForeignKey("ClothesShop.DatabaseAccess.Entities.CartEntity.CartItems", "ItemId")
+                        .WithMany("CartItem")
+                        .HasForeignKey("ItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -503,8 +502,7 @@ namespace ClothesShop.DatabaseAccess.Migrations
 
             modelBuilder.Entity("ClothesShop.DatabaseAccess.Entities.ItemsEntity.Items", b =>
                 {
-                    b.Navigation("CartItem")
-                        .IsRequired();
+                    b.Navigation("CartItem");
 
                     b.Navigation("Photos");
                 });

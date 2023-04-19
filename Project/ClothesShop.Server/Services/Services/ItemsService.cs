@@ -27,7 +27,7 @@ namespace ClothesShop.Services.Services
 
         private ResponceData NullValidation<T>(T inputElement, string successfulMessage, string failureMessage)
         {
-            var result = new ResponceData();
+            var result = new ResponceData(); 
 
             if (inputElement != null)
             {
@@ -64,7 +64,7 @@ namespace ClothesShop.Services.Services
         {
             var mappedItem = _mapper.Map<Items>(newItemPostData);
 
-            var createdItem = _writeItemsRepository.AddNewItem(mappedItem);
+            var createdItem = await _writeItemsRepository.AddNewItem(mappedItem);
 
             return NullValidation(createdItem, "Item was added successfuly", "An error occured while adding new item");
         }
@@ -75,28 +75,28 @@ namespace ClothesShop.Services.Services
 
             var mappedItem = _mapper.Map(newItemPostData, findedItem);
 
-            var updatedItem = _writeItemsRepository.UpdateItem(mappedItem, itemId);
+            var updatedItem = await _writeItemsRepository.UpdateItem(mappedItem, itemId);
 
             return NullValidation(updatedItem, "Item was updated successfully", "An error occured while updating new item");
         }
 
         public async Task<ResponceData> AddCartItem(int itemId, string userId)
         {         
-            var addedToCartItem = _writeItemsRepository.AddCartItem(itemId, userId);
+            var addedToCartItem = await _writeItemsRepository.AddCartItem(itemId, userId);
 
             return NullValidation(addedToCartItem, "Item was added to cart successfully", "An error occured while adding item to cart");
         }
 
         public async Task<ResponceData> DeactivateItem(int itemId)
         {
-            var deactivatedItem = _writeItemsRepository.DeactivateItem(itemId);
+            var deactivatedItem = await _writeItemsRepository.DeactivateItem(itemId);
 
             return NullValidation(deactivatedItem, "Item was deactivated successfully", "An error occured while deactivating cart");
         }
 
         public async Task<ResponceData> DeleteCartItem(int itemId)
         {
-            var deletedCartItem = _writeItemsRepository.DeleteCartItem(itemId);
+            var deletedCartItem = await _writeItemsRepository.DeleteCartItem(itemId);
 
             return NullValidation(deletedCartItem, "Cart item was deleted successfully", "An error occured whiledeleting cart item");
         }

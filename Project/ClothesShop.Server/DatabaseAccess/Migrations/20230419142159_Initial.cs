@@ -32,7 +32,7 @@ namespace ClothesShop.DatabaseAccess.Migrations
                     Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsDeactivated = table.Column<bool>(type: "bit", nullable: false),
                     Balance = table.Column<float>(type: "real", nullable: false),
-                    RegistrationDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 4, 18, 13, 34, 27, 1, DateTimeKind.Local).AddTicks(1128)),
+                    RegistrationDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 4, 19, 16, 21, 59, 339, DateTimeKind.Local).AddTicks(125)),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -320,8 +320,7 @@ namespace ClothesShop.DatabaseAccess.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_CartItems_ItemId",
                 table: "CartItems",
-                column: "ItemId",
-                unique: true);
+                column: "ItemId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CartItems_UserId",

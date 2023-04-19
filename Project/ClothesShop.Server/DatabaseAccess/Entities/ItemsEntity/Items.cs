@@ -30,7 +30,7 @@ namespace ClothesShop.DatabaseAccess.Entities.ItemsEntity
         public int SizeId { get; set; }
         public Sizes Size { get; set; }
 
-        public CartItems CartItem { get; set; }
+        public List<CartItems> CartItem { get; set; } = new List<CartItems>();
 
         public List<Photos> Photos { get; set; }
 
