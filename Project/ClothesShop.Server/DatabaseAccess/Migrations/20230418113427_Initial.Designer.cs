@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClothesShop.DatabaseAccess.Migrations
 {
     [DbContext(typeof(ClothesShopDbContext))]
-    [Migration("20230405134210_Initial")]
+    [Migration("20230418113427_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -117,9 +117,6 @@ namespace ClothesShop.DatabaseAccess.Migrations
                     b.Property<int>("SizeId")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
@@ -127,8 +124,6 @@ namespace ClothesShop.DatabaseAccess.Migrations
                     b.HasIndex("ColorId");
 
                     b.HasIndex("SizeId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Items");
                 });
@@ -228,7 +223,7 @@ namespace ClothesShop.DatabaseAccess.Migrations
                     b.Property<DateTime>("RegistrationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 4, 5, 15, 42, 10, 749, DateTimeKind.Local).AddTicks(5210));
+                        .HasDefaultValue(new DateTime(2023, 4, 18, 13, 34, 27, 1, DateTimeKind.Local).AddTicks(1128));
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -427,19 +422,11 @@ namespace ClothesShop.DatabaseAccess.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("ClothesShop.DatabaseAccess.Entities.UserEntity.User.User", "User")
-                        .WithMany("Items")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
                     b.Navigation("Category");
 
                     b.Navigation("Color");
 
                     b.Navigation("Size");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ClothesShop.DatabaseAccess.Entities.PhotosEntity.Photos", b =>
@@ -530,8 +517,6 @@ namespace ClothesShop.DatabaseAccess.Migrations
             modelBuilder.Entity("ClothesShop.DatabaseAccess.Entities.UserEntity.User.User", b =>
                 {
                     b.Navigation("Cart");
-
-                    b.Navigation("Items");
                 });
 #pragma warning restore 612, 618
         }

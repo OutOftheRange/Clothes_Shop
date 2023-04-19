@@ -21,13 +21,13 @@ namespace ClothesShop.Services.Services
             _tokenService = tokenService;
         }
 
-        public async Task<ResponseData> Register(RegisterData registerData)
+        public async Task<ResponceData> Register(RegisterData registerData)
         {
             var user = _mapper.Map<User>(registerData);
             user.RegistrationDate = DateTime.Now;
 
             var result = await _userManager.CreateAsync(user, registerData.Password);
-            var response = new ResponseData();
+            var response = new ResponceData();
             if (result.Succeeded)
             {
                 response.Result = true;

@@ -44,7 +44,6 @@ namespace ClothesShop.DatabaseAccess.Initializers
 
             foreach (var item in DatabaseSeeder.Items)
             {
-                item.UserId = DatabaseSeeder.Users[Random.Shared.Next(0, DatabaseSeeder.Users.Count)].Id;
                 item.CategoryId = DatabaseSeeder.Categories[Random.Shared.Next(0, DatabaseSeeder.Categories.Count)].Id;
                 item.ColorId = DatabaseSeeder.Colors[Random.Shared.Next(0, DatabaseSeeder.Colors.Count)].Id;
                 item.SizeId = DatabaseSeeder.Sizes[Random.Shared.Next(0, DatabaseSeeder.Sizes.Count)].Id;

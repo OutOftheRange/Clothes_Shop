@@ -32,7 +32,7 @@ namespace ClothesShop.DatabaseAccess.Migrations
                     Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsDeactivated = table.Column<bool>(type: "bit", nullable: false),
                     Balance = table.Column<float>(type: "real", nullable: false),
-                    RegistrationDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 4, 5, 15, 42, 10, 749, DateTimeKind.Local).AddTicks(5210)),
+                    RegistrationDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 4, 18, 13, 34, 27, 1, DateTimeKind.Local).AddTicks(1128)),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -210,17 +210,11 @@ namespace ClothesShop.DatabaseAccess.Migrations
                     ColorId = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
                     SizeId = table.Column<int>(type: "int", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    CategoryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Items", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Items_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Items_Categories_CategoryId",
                         column: x => x.CategoryId,
@@ -350,11 +344,6 @@ namespace ClothesShop.DatabaseAccess.Migrations
                 column: "SizeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Items_UserId",
-                table: "Items",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Photos_ItemId",
                 table: "Photos",
                 column: "ItemId");
@@ -387,10 +376,10 @@ namespace ClothesShop.DatabaseAccess.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Items");
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Items");
 
             migrationBuilder.DropTable(
                 name: "Categories");
