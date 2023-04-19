@@ -9,14 +9,6 @@ namespace ClothesShop.WebAPI.Controllers
     public class ItemsController : ControllerBase
     {
         IItemsService _itemsService;
-        /*
-         * GetItemById(itemId)
-         * UpdateItem(itemId)
-         * DeleteItem(itemId)
-         * GetItemsByPage(AdvertFiltersData filters, int page, int pageSize)
-         * AddItemToCart(itemId, userId)
-         * AddNewItem(DTО)
-         */
         public ItemsController(IItemsService itemsService) {
             _itemsService= itemsService;
         }
@@ -26,7 +18,7 @@ namespace ClothesShop.WebAPI.Controllers
         {
             var result = await _itemsService.GetItemById(itemId);
 
-            return Ok(result);
+            return result != null ? Ok(result) : BadRequest(result);
         }
 
         [HttpGet("get-item-by-page")]
@@ -34,7 +26,7 @@ namespace ClothesShop.WebAPI.Controllers
         {
             var result = await _itemsService.GetItemsByPage(page, pageSize);
 
-            return Ok(result);
+            return result != null ? Ok(result) : BadRequest(result);
         }
 
         [HttpPost("add-new-item")]
@@ -42,7 +34,7 @@ namespace ClothesShop.WebAPI.Controllers
         {
             var result = await _itemsService.AddNewItem(newItemPostData);
 
-            return Ok(result);
+            return result.Result == true ? Ok(result) : BadRequest(result);
         }
 
         [HttpPut("update-item/{itemId}")]
@@ -50,7 +42,7 @@ namespace ClothesShop.WebAPI.Controllers
         {
             var result = await _itemsService.UpdateItem(updatedData, itemId);
 
-            return Ok(result);
+            return result.Result == true ? Ok(result) : BadRequest(result);
         }
 
         [HttpGet("deactivate-item/{itemId}")]
@@ -58,7 +50,7 @@ namespace ClothesShop.WebAPI.Controllers
         {
             var result = await _itemsService.DeactivateItem(itemId);
 
-            return Ok(result);
+            return result.Result == true ? Ok(result) : BadRequest(result);
         }
 
         [HttpGet("add-cart-item/{itemId}, {userId}")]
@@ -66,7 +58,7 @@ namespace ClothesShop.WebAPI.Controllers
         {
             var result = await _itemsService.AddCartItem(itemId, userId);
 
-            return Ok(result);
+            return result.Result == true ? Ok(result) : BadRequest(result);
         }
 
 
@@ -75,7 +67,7 @@ namespace ClothesShop.WebAPI.Controllers
         {
             var result = await _itemsService.DeleteCartItem(itemId);
 
-            return Ok(result);
+            return result.Result == true ? Ok(result) : BadRequest(result);
         }
     }
 }
