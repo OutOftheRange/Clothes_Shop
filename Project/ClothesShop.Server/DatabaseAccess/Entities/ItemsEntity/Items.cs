@@ -9,7 +9,6 @@ using ClothesShop.DatabaseAccess.Entities.CategoryEntity;
 using ClothesShop.DatabaseAccess.Entities.CartEntity;
 using ClothesShop.DatabaseAccess.Entities.ColorsEntity;
 using ClothesShop.DatabaseAccess.Entities.SizesEntity;
-using ClothesShop.DatabaseAccess.Entities.UserEntity.User;
 
 namespace ClothesShop.DatabaseAccess.Entities.ItemsEntity
 {
@@ -31,7 +30,7 @@ namespace ClothesShop.DatabaseAccess.Entities.ItemsEntity
         public int SizeId { get; set; }
         public Sizes Size { get; set; }
 
-        public CartItems CartItem { get; set; }
+        public List<CartItems> CartItem { get; set; } = new List<CartItems>();
 
         public List<Photos> Photos { get; set; }
 
@@ -39,7 +38,5 @@ namespace ClothesShop.DatabaseAccess.Entities.ItemsEntity
         public int CategoryId { get; set; }
         public Category Category { get; set; }
 
-        public Guid UserId { get; set; }
-        public User User { get; set; }
     }
 }

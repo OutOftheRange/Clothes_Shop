@@ -10,7 +10,7 @@ namespace ClothesShop.Services.Interfaces
 {
     public interface IAuthenticationService
     {
-        Task<ResponseData> Register(RegisterData registerData);
+        Task<ResponceData> Register(RegisterData registerData);
         Task<ResponseWithTokenData> Login(LoginData loginData);
     }
 }

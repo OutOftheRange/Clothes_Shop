@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ClothesShop.Services.Models.Authentication
 {
-    public class ResponseWithTokenData : ResponseData
+    public class ResponseWithTokenData : ResponceData
     {
         public string? Token { get; set; }
     }

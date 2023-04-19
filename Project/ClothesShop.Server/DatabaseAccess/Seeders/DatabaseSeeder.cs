@@ -63,7 +63,7 @@ namespace ClothesShop.DatabaseAccess.Seeders
 
             var itemsFaker = new Faker<Items>("en")
                .RuleFor(a => a.Info, f => f.Lorem.Paragraph())
-               .RuleFor(a => a.Name, f => f.PickRandom(Categories).ToString())
+               .RuleFor(a => a.Name, f => f.PickRandom(Categories).Name)
                .RuleFor(a => a.Price, f => f.Random.Double(20, 100))
                .RuleFor(a => a.IsDeactivated, f => f.PickRandom(true, false)) ;
 

@@ -1,4 +1,7 @@
 ﻿using AutoMapper;
+using ClothesShop.DatabaseAccess.Interfaces.ItemsRepository;
+using ClothesShop.DatabaseAccess.Repositories.Items;
+using ClothesShop.DatabaseAccess.Repositories.ItemsRepository;
 using ClothesShop.Services.Interfaces;
 using ClothesShop.Services.MappingProfiles;
 using ClothesShop.Services.Services;
@@ -43,6 +46,7 @@ namespace ClothesShop.WebAPI.ServiceCollectionConfiguration
             var mapperConfig = new MapperConfiguration(map =>
             {
                 map.AddProfile<UserMappingProfile>();
+                map.AddProfile<ItemsMappingProfile>();
             });
             services.AddSingleton(mapperConfig.CreateMapper());
         }
@@ -51,6 +55,9 @@ namespace ClothesShop.WebAPI.ServiceCollectionConfiguration
         {
             services.AddTransient<IAuthenticationService, AuthenticationService>();
             services.AddTransient<ITokenService, TokenService>();
+            services.AddTransient<IItemsService, ItemsService>();
+            services.AddTransient<IReadItemsRepository, ReadItemsRepository>();
+            services.AddTransient<IWriteItemsRepository, WriteItemsRepository>();
 
         }
 

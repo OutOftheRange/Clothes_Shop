@@ -19,10 +19,6 @@ namespace ClothesShop.DatabaseAccess.Entities.UserEntity.User
         public bool IsDeactivated { get; set; }
         public float Balance { get; set; }
         public DateTime RegistrationDate { get; set; }
-
         public List<CartItems> Cart { get; set; } = new List<CartItems>();
-        
-        public List<Items> Items { get; set; }
-
     }
 }

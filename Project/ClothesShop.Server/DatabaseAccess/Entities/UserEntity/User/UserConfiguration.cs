@@ -1,5 +1,4 @@
 ﻿using System;
-using ClothesShop.DatabaseAccess.Entities.CartEntity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
