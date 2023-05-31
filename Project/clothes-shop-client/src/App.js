@@ -3,6 +3,7 @@ import AppRoutes from "./Routes/AppRoutes";
 
 function App() {
     return (
+        
         <div className="App">
             <AppRoutes />
         </div>
@@ -10,3 +11,4 @@ function App() {
 }
 
 export default App;
+ 
